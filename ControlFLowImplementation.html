@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomePage</title>
+
+    <!-- Styles for Featured Content and Dark Mode -->
+    <style>
+        .resource-box {
+            border: 2px solid gray;
+            padding: 15px;
+            margin: 10px 0;
+        }
+
+        .dark-mode {
+            background-color: black;
+            color: white;
+        }
+
+        .dark-mode a {
+            color: lightblue;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Dark Mode checkbox -->
+    <label for="darkMode">Dark Mode</label>
+    <input type="checkbox" id="darkMode">
+
+    <!-- Personal Welcome message -->
+    <h1 id="welcome"></h1>
+
+    <!-- Navigation Menu -->
+    <nav>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>About Me</h2>
+        <p>
+            My name is Jeremy Dean. I am currently studying software development and AI.
+            I also own a Dog training business.
+        </p>
+
+        <!-- List of skills -->
+        <h3>My Skills</h3>
+        <ul id="skillsList"></ul>
+    </section>
+
+    <!-- Featured Content Section -->
+    <section id="featured">
+        <h2>Featured Content</h2>
+
+        <!-- University Resources -->
+        <div id="universityResources" class="resource-box">
+            <h3>University Resources</h3>
+            <a href="https://www.ecpi.edu/" target="_blank">ECPI University</a>
+        </div>
+
+        <!-- Personal Projects -->
+        <div id="personalProjects" class="resource-box">
+            <h3>Personal Projects</h3>
+
+            <a href="https://github.com/jerdea2641/SDC260-Web-Interface-Design" target="_blank">
+              <img src="project1.png" alt="SDC260 Web Interface Design Project" width="200">
+           </a>
+
+            <a href="https://github.com/jerdea2641/SQL" target="_blank">
+              <img src="project2.png" alt="SQL Project" width="200">
+            </a>
+
+            <a href="https://github.com/jerdea2641/SDC250Lab" target="_blank">
+              <img src="project3.png" alt="SDC250 Lab Project" width="200">
+            </a>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2>Projects</h2>
+
+        <a href="https://github.com/jerdea2641/SDC260-Web-Interface-Design" target="_blank">
+            <img src="project1.png" alt="SDC260 Web Interface Design Project" width="200">
+        </a>
+
+        <a href="https://github.com/jerdea2641/SQL" target="_blank">
+            <img src="project2.png" alt="SQL Project" width="200">
+        </a>
+
+        <a href="https://github.com/jerdea2641/SDC250Lab" target="_blank">
+            <img src="project3.png" alt="SDC250 Lab Project" width="200">
+        </a>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Contact</h2>
+
+        <form>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="subject">Subject:</label>
+            <input type="text" id="subject" name="subject" required>
+
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required></textarea>
+
+            <button type="submit" id="contactSubmit">Submit</button>
+        </form>
+    </section>
+
+    <!-- JavaScript -->
+    <script>
+        // Display personalized welcome message
+        var userName = prompt("What is your name?");
+        document.getElementById("welcome").textContent =
+            "Welcome, " + userName + "!";
+
+        // Create an array of skills
+        var skills = ["HTML", "CSS", "JavaScript", "Git", "GitHub"];
+        var skillsList = document.getElementById("skillsList");
+
+        // Display each skill as a bulleted list item
+        for (var i = 0; i < skills.length; i++) {
+            var skillItem = document.createElement("li");
+            skillItem.textContent = skills[i];
+            skillsList.appendChild(skillItem);
+        }
+
+        // Show Featured Content based on project count
+        var projectCount = document.querySelectorAll("#projects a").length;
+        var universityResources = document.getElementById("universityResources");
+        var personalProjects = document.getElementById("personalProjects");
+
+        if (projectCount < 3) {
+            universityResources.style.display = "block";
+            personalProjects.style.display = "block";
+        } else {
+            universityResources.style.display = "none";
+            personalProjects.style.display = "block";
+        }
+
+        // Switch between light mode and dark mode
+        document.getElementById("darkMode").addEventListener("change", function() {
+            document.body.classList.toggle("dark-mode", this.checked);
+        });
+
+        // Handle Contact form button click
+        document.getElementById("contactSubmit").addEventListener("click", function(event) {
+            event.preventDefault();
+
+            var name = document.getElementById("name").value;
+            alert("Thank you, " + name + ", your message has been sent!");
+        });
+    </script>
+
+</body>
+</html>
