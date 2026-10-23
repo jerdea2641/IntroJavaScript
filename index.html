@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,15 +68,15 @@
             <h3>Personal Projects</h3>
 
             <a href="https://github.com/jerdea2641/SDC260-Web-Interface-Design" target="_blank">
-              <img src="project1.png" alt="SDC260 Web Interface Design Project" width="200">
-           </a>
+                <img src="project1.png" alt="SDC260 Web Interface Design Project" width="200">
+            </a>
 
             <a href="https://github.com/jerdea2641/SQL" target="_blank">
-              <img src="project2.png" alt="SQL Project" width="200">
+                <img src="project2.png" alt="SQL Project" width="200">
             </a>
 
             <a href="https://github.com/jerdea2641/SDC250Lab" target="_blank">
-              <img src="project3.png" alt="SDC250 Lab Project" width="200">
+                <img src="project3.png" alt="SDC250 Lab Project" width="200">
             </a>
         </div>
     </section>
@@ -101,7 +102,7 @@
     <section id="contact">
         <h2>Contact</h2>
 
-        <form>
+        <form id="contactForm">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
 
@@ -116,6 +117,8 @@
 
             <button type="submit" id="contactSubmit">Submit</button>
         </form>
+
+        <p id="formStatus"></p>
     </section>
 
     <!-- JavaScript -->
@@ -149,17 +152,36 @@
             personalProjects.style.display = "block";
         }
 
+        // Add a new paragraph to the Projects section
+        var newProject = document.createElement("p");
+        newProject.textContent =
+            "I am continuing to develop my skills through my software development projects.";
+        document.getElementById("projects").appendChild(newProject);
+
+        // Modify existing page elements using selectors
+        document.querySelector("#about h2").style.color = "blue";
+        document.getElementById("contact").style.border = "2px solid gray";
+
         // Switch between light mode and dark mode
         document.getElementById("darkMode").addEventListener("change", function() {
             document.body.classList.toggle("dark-mode", this.checked);
         });
 
-        // Handle Contact form button click
-        document.getElementById("contactSubmit").addEventListener("click", function(event) {
+        // Handle Contact form submission
+        document.getElementById("contactForm").addEventListener("submit", function(event) {
             event.preventDefault();
 
             var name = document.getElementById("name").value;
-            alert("Thank you, " + name + ", your message has been sent!");
+            var formStatus = document.getElementById("formStatus");
+
+            // Display a loading message
+            formStatus.textContent = "Sending message...";
+
+            // Display confirmation after 3 seconds
+            setTimeout(function() {
+                formStatus.textContent =
+                    "Thank you, " + name + "! Message sent successfully.";
+            }, 3000);
         });
     </script>
 
