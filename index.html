@@ -122,18 +122,7 @@
     <!-- Projects Section -->
     <section id="projects">
         <h2>Projects</h2>
-
-        <a href="https://github.com/jerdea2641/SDC260-Web-Interface-Design" target="_blank">
-            <img src="project1.png" alt="SDC260 Web Interface Design Project" width="200">
-        </a>
-
-        <a href="https://github.com/jerdea2641/SQL" target="_blank">
-            <img src="project2.png" alt="SQL Project" width="200">
-        </a>
-
-        <a href="https://github.com/jerdea2641/SDC250Lab" target="_blank">
-            <img src="project3.png" alt="SDC250 Lab Project" width="200">
-        </a>
+        <div id="projectList"></div>
     </section>
 
     <!-- Contact Section -->
@@ -167,6 +156,67 @@
             document.getElementById("welcomeModal").style.display = "none";
         });
 
+        // Create three project objects
+        var project1 = {
+            title: "SDC260 Web Interface Design",
+            summary: "A project focused on web interface design.",
+            image: "project1.png",
+            link: "https://github.com/jerdea2641/SDC260-Web-Interface-Design"
+        };
+
+        var project2 = {
+            title: "SQL Project",
+            summary: "A project containing SQL database work.",
+            image: "project2.png",
+            link: "https://github.com/jerdea2641/SQL"
+        };
+
+        var project3 = {
+            title: "SDC250 Lab Project",
+            summary: "A collection of SDC250 lab assignments.",
+            image: "project3.png",
+            link: "https://github.com/jerdea2641/SDC250Lab"
+        };
+
+        // Create an array containing the project objects
+        var projects = [project1, project2, project3];
+
+        // Store or retrieve project information
+        var savedProjects = sessionStorage.getItem("projects");
+
+        if (savedProjects === null)
+        {
+            sessionStorage.setItem("projects", JSON.stringify(projects));
+        }
+        else
+        {
+            projects = JSON.parse(savedProjects);
+        }
+
+        // Display projects dynamically
+        var projectList = document.querySelector("#projectList");
+
+        for (var i = 0; i < projects.length; i++)
+        {
+            var title = document.createElement("h3");
+            var summary = document.createElement("p");
+            var image = document.createElement("img");
+            var link = document.createElement("a");
+
+            title.textContent = projects[i].title;
+            summary.textContent = projects[i].summary;
+            image.src = projects[i].image;
+            image.alt = projects[i].title;
+            image.width = 200;
+            link.href = projects[i].link;
+            link.textContent = "View Repository";
+
+            projectList.appendChild(title);
+            projectList.appendChild(summary);
+            projectList.appendChild(image);
+            projectList.appendChild(link);
+        }
+
         // Create an array of skills
         var skills = ["HTML", "CSS", "JavaScript", "Git", "GitHub"];
         var skillsList = document.getElementById("skillsList");
@@ -180,7 +230,7 @@
         }
 
         // Show Featured Content based on project count
-        var projectCount = document.querySelectorAll("#projects a").length;
+        var projectCount = projects.length;
         var universityResources = document.getElementById("universityResources");
         var personalProjects = document.getElementById("personalProjects");
 
